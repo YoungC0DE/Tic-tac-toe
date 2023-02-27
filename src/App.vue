@@ -54,12 +54,12 @@ export default {
         iconHtml: result != 'Tie' ? result : '!',
         confirmButtonColor: '#474d52ff',
         confirmButtonText: 'Play again',
-        backdrop: `
+        backdrop: result != 'Tie' ? `
             rgba(0,0,123,0.4)
             url("https://sweetalert2.github.io/images/nyan-cat.gif")
             left top
             no-repeat
-        `
+        ` : ''
       }).then((confirm) => {
         if (confirm) window.location.reload(true)
       })
