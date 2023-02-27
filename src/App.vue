@@ -66,15 +66,10 @@ export default {
     },
     checkWinner() {
       // checking if the current player has made any matches
-      for (let i = 0; i < this.combinations.length; i++) {
-        if (this.combinations[i].every((item) => this.inGame.positionsX.includes(item))) {
-          this.inGame.result = 'X'
-        }
-
-        if (this.combinations[i].every((item) => this.inGame.positionsO.includes(item))) {
-          this.inGame.result = 'O'
-        }
-      }
+      this.combinations.forEach((item, index) => {
+        if ( item.every(combo => this.inGame.positionsX.includes(combo)) ) this.inGame.result = 'X'
+        if ( item.every(combo => this.inGame.positionsO.includes(combo)) ) this.inGame.result = 'O'
+      })
 
       // winner X
       if (this.inGame.result == 'X') this.personSwal('X')
