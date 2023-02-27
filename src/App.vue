@@ -47,8 +47,25 @@ export default {
     }
   },
   methods: {
-    resetGame() {
-      window.location.reload(true)
+    personSwal() {
+      Swal.fire({
+        title:
+          this.inGame.result != 'Tie'
+            ? `The player ${this.inGame.result} wins`
+            : "There's no winner",
+        icon: this.inGame.result != 'Tie' ? 'success' : 'question',
+        iconHtml: this.inGame.result != 'Tie' ? this.inGame.result : '!',
+        confirmButtonColor: '#474d52ff',
+        confirmButtonText: 'Play again',
+        backdrop: `
+            rgba(0,0,123,0.4)
+            url("https://sweetalert2.github.io/images/nyan-cat.gif")
+            left top
+            no-repeat
+        `
+      }).then((confirm) => {
+        if (confirm) window.location.reload(true)
+      })
     },
     checkWinner() {
       // checking if the current player has made any matches
@@ -56,49 +73,17 @@ export default {
         if (this.combinations[i].every((item) => this.inGame.positionsX.includes(item))) {
           this.inGame.result = 'X'
         }
-
+        
         if (this.combinations[i].every((item) => this.inGame.positionsO.includes(item))) {
           this.inGame.result = 'O'
         }
       }
 
       // winner X
-      if (this.inGame.result == 'X') {
-        Swal.fire({
-          title: 'The player X wins',
-          icon: 'success',
-          iconHtml: 'X',
-          confirmButtonColor: '#474d52ff',
-          confirmButtonText: 'Play again',
-          backdrop: `
-            rgba(0,0,123,0.4)
-            url("https://sweetalert2.github.io/images/nyan-cat.gif")
-            left top
-            no-repeat
-        `
-        }).then((confirm) => {
-          if (confirm) this.resetGame()
-        })
-      }
+      if (this.inGame.result == 'X') this.personSwal()
 
       // winner O
-      if (this.inGame.result == 'O') {
-        Swal.fire({
-          title: 'The player O wins',
-          icon: 'success',
-          iconHtml: 'O',
-          confirmButtonColor: '#474d52ff',
-          confirmButtonText: 'Play again',
-          backdrop: `
-            rgba(0,0,123,0.4)
-            url("https://sweetalert2.github.io/images/nyan-cat.gif")
-            left top
-            no-repeat
-        `
-        }).then((confirm) => {
-          if (confirm) this.resetGame()
-        })
-      }
+      if (this.inGame.result == 'O') this.personSwal()
 
       // tie
       if (
@@ -106,18 +91,8 @@ export default {
         this.inGame.positionsO.length > 4 &&
         this.inGame.result != 'X' &&
         this.inGame.result != 'O'
-      ) {
-        Swal.fire({
-          title: "It's a tie",
-          text: "There's no winner",
-          icon: 'question',
-          iconHtml: '!',
-          confirmButtonColor: '#474d52ff',
-          confirmButtonText: 'Play again'
-        }).then((confirm) => {
-          if (confirm) this.resetGame()
-        })
-      }
+      )
+        this.personSwal()
       return
     },
     game(el) {
