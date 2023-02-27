@@ -47,14 +47,11 @@ export default {
     }
   },
   methods: {
-    personSwal() {
+    personSwal(result) {
       Swal.fire({
-        title:
-          this.inGame.result != 'Tie'
-            ? `The player ${this.inGame.result} wins`
-            : "There's no winner",
-        icon: this.inGame.result != 'Tie' ? 'success' : 'question',
-        iconHtml: this.inGame.result != 'Tie' ? this.inGame.result : '!',
+        title: result != 'Tie' ? `The player ${result} wins` : "There's no winner",
+        icon: result != 'Tie' ? 'success' : 'question',
+        iconHtml: result != 'Tie' ? result : '!',
         confirmButtonColor: '#474d52ff',
         confirmButtonText: 'Play again',
         backdrop: `
@@ -73,17 +70,17 @@ export default {
         if (this.combinations[i].every((item) => this.inGame.positionsX.includes(item))) {
           this.inGame.result = 'X'
         }
-        
+
         if (this.combinations[i].every((item) => this.inGame.positionsO.includes(item))) {
           this.inGame.result = 'O'
         }
       }
 
       // winner X
-      if (this.inGame.result == 'X') this.personSwal()
+      if (this.inGame.result == 'X') this.personSwal('X')
 
       // winner O
-      if (this.inGame.result == 'O') this.personSwal()
+      if (this.inGame.result == 'O') this.personSwal('O')
 
       // tie
       if (
@@ -92,7 +89,7 @@ export default {
         this.inGame.result != 'X' &&
         this.inGame.result != 'O'
       )
-        this.personSwal()
+        this.personSwal('Tie')
       return
     },
     game(el) {
