@@ -94,10 +94,10 @@ export default {
         this.inGame.busyBlocks.push(`a${el}`)
         // change the player after play
         if (this.inGame.playerTurn == 'X') {
-          this.inGame.playerTurn = 'X'
+          this.inGame.playerTurn = 'O'
           this.inGame.positionsO.push(`a${el}`)
         } else {
-          this.inGame.playerTurn = 'O'
+          this.inGame.playerTurn = 'X'
           this.inGame.positionsX.push(`a${el}`)
         }
 
