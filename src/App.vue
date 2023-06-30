@@ -9,8 +9,8 @@
     </section>
     <h2>
       Player's turn:
-      <span :style="'color:' + (inGame.playerTurn == 'X' ? 'blue' : 'red')">
-        {{ inGame.playerTurn }}</span
+      <span :style="'color:' + (inGame.playerTurn == 'X' ? 'red' : 'blue')">
+        {{ inGame.playerTurn == 'X' ? 'O' : 'X' }}</span
       >
     </h2>
   </main>
